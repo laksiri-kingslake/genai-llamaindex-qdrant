@@ -19,6 +19,32 @@ python -m venv venv
 pip install -r requirements.txt
 ```
 
+## Configure VS Code Remote SSH
+1. Key pair
+```bash
+# Generate key pair in local machine - if not don already
+ssh-keygen -t ed25519 -C "your_email@example.com"
+
+# Copy public key to the remote host
+ssh-copy-id -i ~/.ssh/id_ed25519.pub ubuntu@ai.devbits.click
+
+# If aove doesn't work copy ~/.ssh/id_ed25519.pub manualy to the remote host and execute
+cat id_ed25519.pub >> ~/.ssh/authorized_keys
+```
+2. VS Code setup
+```bash
+code ~/.ssh/config
+```
+```plaintext
+Host ai.devbits.click
+  HostName ai.devbits.click
+  User ubuntu
+  IdentityFile ~/.ssh/id_ed25519
+```
+3. Connect to Your EC2 Instance in VS Code
+- Open the Command Palette (Ctrl+Shift+P or Cmd+Shift+P).
+- Select Remote-SSH: Connect to Host.
+- Choose ai.devbits.click from the list.
 
 ## References
 
